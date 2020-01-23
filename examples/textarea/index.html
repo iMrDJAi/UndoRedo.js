@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+        <meta charset="UTF-8">
+        <title>UndoRedo.js test</title>
+</head>
+
+<body>
+        <textarea id="input" style="height: 300px; width: 400px;"></textarea>
+        <br/>
+        <button id="undo" style="height: 50px; width: 200px;">undo</button>
+        <button id="redo" style="height: 50px; width: 200px;">redo</button>
+        <script src="./mrdja-undo-redo-history.js"></script>
+        <script src="../../src/UndoRedo.js"></script>
+</body>
+
+<script>
+const txtHistory = newHistory(5);
+const textarea = document.querySelector("#input");
+textarea.addEventListener('input', () => {
+  if ((textarea.value.length - txtHistory.current().length) > 1 || (textarea.value.length - txtHistory.current().length) < -1) {
+    txtHistory.record(textarea.value, true);
+  } else {
+    txtHistory.record(textarea.value);
+  }
+});
+setTimeout(() => {
+  if (textarea.value) txtHistory.record(textarea.value, true);
+}, 100);
+document.querySelector("#undo").addEventListener('click', () => {
+  const txtundo = txtHistory.undo();
+  if (txtundo !== undefined) {
+    textarea.value = txtundo;
+  }
+});
+document.querySelector("#redo").addEventListener('click', () => {
+  const txtredo = txtHistory.redo();
+  if (txtredo !== undefined) {
+    textarea.value = txtredo;
+  }
+});
+</script>
+
+</html>
