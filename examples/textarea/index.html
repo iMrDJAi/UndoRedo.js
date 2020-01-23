@@ -2,44 +2,54 @@
 <html>
 
 <head>
-        <meta charset="UTF-8">
-        <title>UndoRedo.js test</title>
+  <meta charset="UTF-8">
+  <title>UndoRedo.js test</title>
 </head>
 
 <body>
-        <textarea id="input" style="height: 300px; width: 400px;"></textarea>
-        <br/>
-        <button id="undo" style="height: 50px; width: 200px;">undo</button>
-        <button id="redo" style="height: 50px; width: 200px;">redo</button>
-        <script src="./mrdja-undo-redo-history.js"></script>
-        <script src="../../src/UndoRedo.js"></script>
+  <textarea id="input" style="height: 300px; width: 400px;"></textarea>
+  <br />
+  <button id="undo" style="height: 50px; width: 200px;">undo</button>
+  <button id="redo" style="height: 50px; width: 200px;">redo</button>
+  <script src="../../src/UndoRedo.js"></script>
 </body>
 
 <script>
-const txtHistory = newHistory(5);
-const textarea = document.querySelector("#input");
-textarea.addEventListener('input', () => {
-  if ((textarea.value.length - txtHistory.current().length) > 1 || (textarea.value.length - txtHistory.current().length) < -1) {
-    txtHistory.record(textarea.value, true);
-  } else {
-    txtHistory.record(textarea.value);
-  }
-});
-setTimeout(() => {
-  if (textarea.value) txtHistory.record(textarea.value, true);
-}, 100);
-document.querySelector("#undo").addEventListener('click', () => {
-  const txtundo = txtHistory.undo();
-  if (txtundo !== undefined) {
-    textarea.value = txtundo;
-  }
-});
-document.querySelector("#redo").addEventListener('click', () => {
-  const txtredo = txtHistory.redo();
-  if (txtredo !== undefined) {
-    textarea.value = txtredo;
-  }
-});
+  // Require the library function
+  const txtHistory = window.UndoRedojs(5);
+  // Get the textarea
+  const textarea = document.querySelector("#input");
+  // Add event listener for inputs on the textarea
+  textarea.addEventListener('input', () => { 
+    // Check if the new textarea value is different
+    if (txtHistory.current() !== textarea.value) {
+      // Check for pastes, auto corrects..
+      if ((textarea.value.length - txtHistory.current().length) > 1 || (textarea.value.length - txtHistory.current().length) < -1 || (textarea.value.length - txtHistory.current().length) === 0) {
+        // Record the textarea value and force to bypass cooldown
+        txtHistory.record(textarea.value, true);
+      // Check for single key press, single chacacter paste..
+      } else {
+        // Record the textarea value
+        txtHistory.record(textarea.value);
+      }
+    }
+  });
+  // Some browsers will auto-fill the textarea again after reloading, this will deal with that
+  setTimeout(() => {
+    if (textarea.value) txtHistory.record(textarea.value, true);
+  }, 100);
+  // The undo button
+  document.querySelector("#undo").addEventListener('click', () => {
+    if (txtHistory.undo(true) !== undefined) {
+      textarea.value = txtHistory.undo();
+    }
+  });
+  // The redo button
+  document.querySelector("#redo").addEventListener('click', () => {
+    if (txtHistory.redo(true) !== undefined) {
+      textarea.value = txtHistory.redo();
+    }
+  });
 </script>
 
 </html>
