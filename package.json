@@ -1,7 +1,7 @@
 {
   "name": "undoredo-js",
   "version": "1.0.0",
-  "description": "A powerful and simple javascript library provides a history for undo redo functionality. Just like a time machine! 🕐",
+  "description": "A powerful and simple javascript library provides a history for undo/redo functionality. Just like a time machine! 🕐",
   "main": "./src/undoredo.js",
   "directories": {
     "example": "examples"
@@ -22,7 +22,11 @@
     "undo",
     "redo"
   ],
-  "author": "mr_dja",
+  "author": {
+    "name": "${Mr.DJA}",
+    "email": "imrdjai@yahoo.com",
+    "discord": "https://invite.gg/MrDJA"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/iMrDJAi/UndoRedo.js/issues"
