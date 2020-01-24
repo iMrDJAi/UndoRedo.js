@@ -153,7 +153,7 @@ console.log(myHistory.redo());
 >
 >You can update the current element using the `current` method:
 ```js
-console.log(myHistory('1234567'));
+console.log(myHistory.current('1234567'));
 // output => "1234567"
 ```
 ## Examples:
