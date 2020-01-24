@@ -6,11 +6,11 @@ A powerful and simple javascript library provides a history for undo/redo functi
 
 Use this command to install the node module:
 ```bash
-npm install undoredo-js --save
+npm install undoredo.js --save
 ```
 Then simply require it:
 ```js
-const UndoRedojs = require("undoredo-js");
+const UndoRedojs = require("undoredo.js");
 ```
 
 **Browser**:
