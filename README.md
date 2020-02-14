@@ -130,7 +130,7 @@ console.log(redo);
 console.log(myHistory.current());
 // output => "1234567"
 ```
->So the `undo` method will make you step forward once inside the array and will return the next element.
+>So the `redo` method will make you step forward once inside the array and will return the next element.
 >
 >What if we add `true` as a parameter?
 ```js
