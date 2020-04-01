@@ -1,11 +1,8 @@
 {
   "name": "undoredo-js",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A powerful and simple javascript library provides a history for undo/redo functionality. Just like a time machine! 🕐",
   "main": "./src/undoredo.js",
-  "directories": {
-    "example": "examples"
-  },
   "scripts": {
     "test": "echo \"Warning: no test specified\""
   },

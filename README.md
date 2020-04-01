@@ -130,7 +130,7 @@ console.log(redo);
 console.log(myHistory.current());
 // output => "1234567"
 ```
->So the `redo` method will make you step forward once inside the array and will return the next element.
+>So the `undo` method will make you step forward once inside the array and will return the next element.
 >
 >What if we add `true` as a parameter?
 ```js
@@ -157,9 +157,9 @@ console.log(myHistory.current('1234567'));
 // output => "1234567"
 ```
 ## Examples:
-You can find a good example of a textarea with working undo/redo buttons [here](https://github.com/iMrDJAi/UndoRedo.js/blob/master/examples/textarea/index.html).
+You can find a good example of a textarea with working undo/redo buttons [here](https://github.com/iMrDJAi/UndoRedo.js/blob/master/index.html).
 
-Maybe I will add a live demo soon.
+That's a [live demo](https://imrdjai.github.io/UndoRedo.js).
 
 ## Notes:
 - This package has made by [${Mr.DJA}](https://invite.gg/MrDJA).

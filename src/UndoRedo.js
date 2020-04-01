@@ -61,7 +61,8 @@
   }
   if (typeof (module) !== 'undefined' && typeof (module.exports) !== 'undefined') {
     module.exports = UndoRedojs;
-  } else {
+  } 
+  if (typeof (window) !== 'undefined' && typeof (window) === 'object') {
     window.UndoRedojs = UndoRedojs;
   }
 })();
