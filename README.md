@@ -1,4 +1,6 @@
-# UndoRedo.js
+# UndoRedo.js 
+[![npm](https://img.shields.io/npm/v/undoredo.js?color=red)](https://www.npmjs.com/package/undoredo.js)
+
 A powerful and simple javascript library provides a history for undo/redo functionality. Just like a time machine! 🕐
 ***
 ## Install:
