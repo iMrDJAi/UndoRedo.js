@@ -32,6 +32,8 @@ This time it will be:
 <script src='./js/UndorRedo.js'></script>
 ```
 
+By the same way you can use `UndoRedo.min.js` instead, which is a minified version of `UndoRedo.js`. [JsDeliver CDN link](https://cdn.jsdelivr.net/gh/iMrDJAi/UndoRedo.js/src/UndoRedo.min.js).
+
 The main function will be declared as `window.UndoRedojs`:
 ```js
 const UndoRedojs = window.UndoRedojs;
