@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>UndoRedo.js - Textarea Example</title>
 </head>
 
@@ -33,23 +34,23 @@
                 txtHistory.record(textarea.value)
             }
         }
-    });
+    })
     // Some browsers will auto-fill the textarea again after reloading, this will deal with that
     setTimeout(() => {
         if (textarea.value) txtHistory.record(textarea.value, true)
-    }, 100);
+    }, 100)
     // The undo button
     document.querySelector("#undo").addEventListener('click', () => {
         if (txtHistory.undo(true) !== undefined) {
             textarea.value = txtHistory.undo()
         }
-    });
+    })
     // The redo button
     document.querySelector("#redo").addEventListener('click', () => {
         if (txtHistory.redo(true) !== undefined) {
             textarea.value = txtHistory.redo()
         }
-    });
+    })
 </script>
 
 </html>
