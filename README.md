@@ -41,7 +41,7 @@ The main function will be declared as `window.UndoRedojs`:
 const UndoRedojs = window.UndoRedojs
 ```
 
-You can also bundle it info your project using [Webpack](https://webpack.js.org/guides/getting-started/). You can use it in anyway you want, it's just another npm packege after all! 😅
+You can also bundle it into your project using [Webpack](https://webpack.js.org/guides/getting-started/). You can use it in anyway you want, it's just another npm packege after all! 😅
 
 ## Usage:
 This package is useful for any step-by-step task, for example:
@@ -127,7 +127,7 @@ console.log(undo);
 console.log(myHistory.current());
 // output => "1234567"
 ```
->As you can see the current element stay `"1234567"`, so this time it returns the previous element without stepping back. We call this parameter: `readOnly`.
+>As you can see the current element stays `"1234567"`, so this time it returns the previous element without stepping back. We call this parameter: `readOnly`.
 >
 >To redo, just use the `redo` method:
 ```js
@@ -147,7 +147,7 @@ console.log(redo);
 console.log(myHistory.current());
 // output => "123456"
 ```
->As you can see the current element stay `"123456"`, so this time it returns the next element without stepping forward. We call this parameter: `readOnly`.
+>As you can see the current element stays `"123456"`, so this time it returns the next element without stepping forward. We call this parameter: `readOnly`.
 >
 >What if we undo then record then redo again?
 ```js
