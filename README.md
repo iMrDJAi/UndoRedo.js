@@ -172,6 +172,9 @@ That's a [live demo](https://imrdjai.github.io/UndoRedo.js).
 ## Dependents Projects:
 Wanna use **UndoRedo.js** on your next big project? Let me now and it will be listed here! :)
 
+## Special Thanks:
+- CSS Script website for sharing this project <3 (https://www.cssscript.com/undo-redo-history).
+
 ## Notes:
 - This is my first package, leave a star if you like it <3.
 - You are free to suggest anything and I will try to add it soon if I found it useful.
