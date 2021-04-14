@@ -50,19 +50,20 @@ This package is useful for any step-by-step task, for example:
 - Something like a browser history.
 - A settings page.
 - A files explorer.
+- A calculator (why not xD).
 - And more...
 
 **Basic usage**:
 
->Lets setup our history:
+Lets setup our history:
 ```js
  const myHistory = new UndoRedojs(5)
 ```
->This will return a class object with the methods and the properties that we will use later.
->
->As you can see, we added the number **5** as a parameter, this will be used for cooldowns, keep reading for more details.
->
->To push new elements to the history, use the `record` method:
+This will return a class object with the methods and the properties that we will use later.
+
+As you can see, we added the number **5** as a parameter, this will be used for cooldowns, keep reading for more details.
+
+To push new elements to the history, use the `record` method:
 ```js
 myHistory.record('1')
 myHistory.record('12')
@@ -72,44 +73,44 @@ myHistory.record('12345')
 myHistory.record('123456')
 myHistory.record('1234567', true)
 ```
->To get the history array, use the `stack` property:
+To get the history array, use the `stack` property:
 ```js
 console.log(myHistory.stack)
 // output => Array(4) [ "", "12345", "123456", "1234567" ]
 ```
->You can get the current history position using the `currentNumber` property:
+You can get the current history position using the `currentIndex` property:
 ```js
-console.log(myHistory.currentNumber)
+console.log(myHistory.currentIndex)
 // output => 3
 ```
->Remember that arrays always start from **0**, so the number **3** here is actually the **4th** element, wanna check?
+Remember that arrays always start from **0**, so the number **3** here is actually the **4th** element, wanna check?
 ```js
-console.log(myHistory.stack[myHistory.currentNumber])
+console.log(myHistory.stack[myHistory.currentIndex])
 // output => "1234567"
 ```
->There is another way to get the current element, using the `current` method:
+There is another way to get the current element, using the `current` method:
 ```js
 console.log(myHistory.current())
 // output => "1234567"
 ```
->The history array always starts with an empty element, this can be very helpful for text areas.
->
->So we called the `record` method 7 times, but we only got 3 recorded elements (without the 1st empty one). Why?
->
->We used the number **5** as a parameter for the `UndoRedojs` function, it's just like saying: 'Record every 5 calls', that makes cooldowns. We call this parameter: `cooldownNumber`.
->
->So during cooldowns the `record` method will not gonna push new elements to the history stack, instead of that it will update the current element with the new one.
->
->To disable that, just use the number **1**, or keep it empty because the default `cooldownNumber` is **1**:
+The history array always starts with an empty element, this can be very helpful for text areas.
+
+So we called the `record` method 7 times, but we only got 3 recorded elements (without the 1st empty one). Why?
+
+We used the number **5** as a parameter for the `UndoRedojs` function, it's just like saying: 'Record every 5 calls', that makes cooldowns. We call this parameter: `cooldown`.
+
+So during cooldowns the `record` method will not gonna push new elements to the history stack, instead of that it will update the current element with the new one.
+
+To disable that, just use the number **1**, or keep it empty because the default `cooldown` is **1**:
 ```js
  const myHistory = UndoRedojs()
 ```
->
->But we see that the `"1234567"` element is recorded during a cooldown. Why?
->
->The difference here is that we added `true` as a 2nd parameter for the `record` method, it's just like saying: 'Force to record', that will make it bypass the cooldown. We call this parameter: `force`.
->
->To undo, just use the `undo` method:
+
+But we see that the `"1234567"` element is recorded during a cooldown. Why?
+
+The difference here is that we added `true` as a 2nd parameter for the `record` method, it's just like saying: 'Force to record', that will make it bypass the cooldown. We call this parameter: `force`.
+
+To undo, just use the `undo` method:
 ```js
 const undo = myHistory.undo()
 console.log(undo)
@@ -117,9 +118,9 @@ console.log(undo)
 console.log(myHistory.current())
 // output => "123456"
 ```
->So the `undo` method will make you step back once inside the array and will return the previous element.
->
->What if we add `true` as a parameter?
+So the `undo` method will make you step back once inside the array and will return the previous element.
+
+What if we add `true` as a parameter?
 ```js
 const undo = myHistory.undo(true);
 console.log(undo);
@@ -127,9 +128,9 @@ console.log(undo);
 console.log(myHistory.current());
 // output => "1234567"
 ```
->As you can see the current element stays `"1234567"`, so this time it returns the previous element without stepping back. We call this parameter: `readOnly`.
->
->To redo, just use the `redo` method:
+As you can see the current element stays `"1234567"`, so this time it returns the previous element without stepping back. We call this parameter: `readOnly`.
+
+To redo, just use the `redo` method:
 ```js
 const redo = myHistory.redo()
 console.log(redo)
@@ -137,9 +138,9 @@ console.log(redo)
 console.log(myHistory.current())
 // output => "1234567"
 ```
->So the `redo` method will make you step forward once inside the array and will return the next element.
->
->What if we add `true` as a parameter?
+So the `redo` method will make you step forward once inside the array and will return the next element.
+
+What if we add `true` as a parameter?
 ```js
 const redo = myHistory.redo(true);
 console.log(redo);
@@ -147,18 +148,18 @@ console.log(redo);
 console.log(myHistory.current());
 // output => "123456"
 ```
->As you can see the current element stays `"123456"`, so this time it returns the next element without stepping forward. We call this parameter: `readOnly`.
->
->What if we undo then record then redo again?
+As you can see the current element stays `"123456"`, so this time it returns the next element without stepping forward. We call this parameter: `readOnly`.
+
+What if we undo then record then redo again?
 ```js
 myHistory.undo()
 myHistory.record('12345678')
 console.log(myHistory.redo())
 // output => undefined
 ```
->Why? Because the `record` method will remove every next element.
->
->You can update the current element using the `current` method:
+Why? Because the `record` method will remove every next element.
+
+You can update the current element using the `current` method:
 ```js
 console.log(myHistory.current('1234567'));
 // output => "1234567"
