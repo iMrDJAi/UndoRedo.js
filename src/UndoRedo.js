@@ -1,63 +1,63 @@
 (() => {
     class UndoRedojs {
-        constructor(cooldownNumber) {
-            if (!cooldownNumber || isNaN(cooldownNumber) || cooldownNumber <= 0) this.cooldownNumber = 1
-            else this.cooldownNumber = cooldownNumber
+        constructor(cooldown) {
+            if (!cooldown || isNaN(cooldown) || cooldown <= 0) this.cooldown = 1
+            else this.cooldown = cooldown
             this.stack = ['']
-            this.currentNumber = 0
-            this.currentCooldownNumber = 0
+            this.currentIndex = 0
+            this.cooldownState = 0
         }
         record(data, force) {
-            if (this.currentNumber === this.stack.length - 1) { //checking for regular history updates
-                if ((this.currentCooldownNumber >= this.cooldownNumber || this.currentCooldownNumber === 0) && force !== true) { //history updates after a new cooldown
+            if (this.currentIndex === this.stack.length - 1) { //checking for regular history updates
+                if ((this.cooldownState >= this.cooldown || this.cooldownState === 0) && force !== true) { //history updates after a new cooldown
                     this.stack.push(data)
-                    this.currentNumber++
-                    this.currentCooldownNumber = 1
-                } else if (this.currentCooldownNumber < this.cooldownNumber && force !== true) { //history updates during cooldown
+                    this.currentIndex++
+                    this.cooldownState = 1
+                } else if (this.cooldownState < this.cooldown && force !== true) { //history updates during cooldown
                     this.current(data)
-                    this.currentCooldownNumber++
+                    this.cooldownState++
                 } else if (force === true) { //force to record without cooldown
                     this.stack.push(data)
-                    this.currentNumber++
-                    this.currentCooldownNumber = this.cooldownNumber
+                    this.currentIndex++
+                    this.cooldownState = this.cooldown
                 }
-            } else if (this.currentNumber < this.stack.length - 1) { //checking for history updates after undo
+            } else if (this.currentIndex < this.stack.length - 1) { //checking for history updates after undo
                 if (force !== true) { //history updates after undo
-                    this.stack.length = this.currentNumber + 1
+                    this.stack.length = this.currentIndex + 1
                     this.stack.push(data)
-                    this.currentNumber++
-                    this.currentCooldownNumber = 1
+                    this.currentIndex++
+                    this.cooldownState = 1
                 } else if (force === true) { ////force to record after undo 
-                    this.stack.length = this.currentNumber + 1
+                    this.stack.length = this.currentIndex + 1
                     this.stack.push(data)
-                    this.currentNumber++
-                    this.currentCooldownNumber = this.cooldownNumber
+                    this.currentIndex++
+                    this.cooldownState = this.cooldown
                 }
             }
         }
         undo(readOnly) {
-            if (this.currentNumber > 0) {
+            if (this.currentIndex > 0) {
                 if (readOnly !== true) {
-                    this.currentNumber--
-                    return this.stack[this.currentNumber]
+                    this.currentIndex--
+                    return this.stack[this.currentIndex]
                 } else {
-                    return this.stack[this.currentNumber - 1]
+                    return this.stack[this.currentIndex - 1]
                 }
             }
         }
         redo(readOnly) {
-            if (this.currentNumber < this.stack.length - 1) {
+            if (this.currentIndex < this.stack.length - 1) {
                 if (readOnly !== true) {
-                    this.currentNumber++
-                    return this.stack[this.currentNumber]
+                    this.currentIndex++
+                    return this.stack[this.currentIndex]
                 } else {
-                    return this.stack[this.currentNumber + 1]
+                    return this.stack[this.currentIndex + 1]
                 }
             }
         }
         current(data) {
-            if (data) this.stack[this.currentNumber] = data
-            return this.stack[this.currentNumber]
+            if (data) this.stack[this.currentIndex] = data
+            return this.stack[this.currentIndex]
         }
     }
     if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') { //node
