@@ -1,6 +1,6 @@
 {
   "name": "undoredo.js",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A powerful and simple Javascript library provides a history for undo/redo functionality. Just like a time machine! 🕐",
   "main": "./src/undoredo.js",
   "repository": {
