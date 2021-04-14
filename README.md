@@ -3,7 +3,7 @@
 
 A powerful and simple Javascript library provides a history for undo/redo functionality. Just like a time machine! 🕐
 ***
-## Install:
+## Installation:
 **Node.js**:
 
 Use this command to install the node module:
